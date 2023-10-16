@@ -123,8 +123,8 @@ const App = ({ signOut }) => {
       />
     )}
     <Image
-        src={await Storage.get(note.name)}
-        alt={'visual aid for ${image.name}'}
+        src={note.name}
+        alt={'visual aid for ${note.image}'}
         style={{ width: 400 }}
       />
     <Button variation="link" onClick={() => deleteNote(note)}>
