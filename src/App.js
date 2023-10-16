@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
+<<<<<<< HEAD
 import { API, Storage } from 'aws-amplify';
+=======
+import { API } from "aws-amplify";
+>>>>>>> 4b4b38fbd08cbad1e1c39096b40316828a856586
 import {
   Button,
   Flex,
   Heading,
+<<<<<<< HEAD
   Image,
+=======
+>>>>>>> 4b4b38fbd08cbad1e1c39096b40316828a856586
   Text,
   TextField,
   View,
   withAuthenticator,
+<<<<<<< HEAD
 } from '@aws-amplify/ui-react';
+=======
+} from "@aws-amplify/ui-react";
+>>>>>>> 4b4b38fbd08cbad1e1c39096b40316828a856586
 import { listNotes } from "./graphql/queries";
 import {
   createNote as createNoteMutation,
@@ -28,6 +39,7 @@ const App = ({ signOut }) => {
   async function fetchNotes() {
     const apiData = await API.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
+<<<<<<< HEAD
     await Promise.all(
       notesFromAPI.map(async (note) => {
         if (note.image) {
@@ -37,12 +49,15 @@ const App = ({ signOut }) => {
         return note;
       })
     );
+=======
+>>>>>>> 4b4b38fbd08cbad1e1c39096b40316828a856586
     setNotes(notesFromAPI);
   }
 
   async function createNote(event) {
     event.preventDefault();
     const form = new FormData(event.target);
+<<<<<<< HEAD
     const image = form.get("image");
     const data = {
       name: form.get("name"),
@@ -50,6 +65,12 @@ const App = ({ signOut }) => {
       image: image.name,
     };
     if (!!data.image) await Storage.put(data.name, image);
+=======
+    const data = {
+      name: form.get("name"),
+      description: form.get("description"),
+    };
+>>>>>>> 4b4b38fbd08cbad1e1c39096b40316828a856586
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
@@ -57,12 +78,19 @@ const App = ({ signOut }) => {
     fetchNotes();
     event.target.reset();
   }
+<<<<<<< HEAD
   
 
   async function deleteNote({ id, name }) {
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
     await Storage.remove(name);
+=======
+
+  async function deleteNote({ id }) {
+    const newNotes = notes.filter((note) => note.id !== id);
+    setNotes(newNotes);
+>>>>>>> 4b4b38fbd08cbad1e1c39096b40316828a856586
     await API.graphql({
       query: deleteNoteMutation,
       variables: { input: { id } },
@@ -72,7 +100,10 @@ const App = ({ signOut }) => {
   return (
     <View className="App">
       <Heading level={1}>My Notes App</Heading>
+<<<<<<< HEAD
       
+=======
+>>>>>>> 4b4b38fbd08cbad1e1c39096b40316828a856586
       <View as="form" margin="3rem 0" onSubmit={createNote}>
         <Flex direction="row" justifyContent="center">
           <TextField
@@ -96,6 +127,7 @@ const App = ({ signOut }) => {
           </Button>
         </Flex>
       </View>
+<<<<<<< HEAD
       <View
   name="image"
   as="input"
@@ -129,6 +161,27 @@ const App = ({ signOut }) => {
 ))}
       </View>
       
+=======
+      <Heading level={2}>Current Notes</Heading>
+      <View margin="3rem 0">
+        {notes.map((note) => (
+          <Flex
+            key={note.id || note.name}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Text as="strong" fontWeight={700}>
+              {note.name}
+            </Text>
+            <Text as="span">{note.description}</Text>
+            <Button variation="link" onClick={() => deleteNote(note)}>
+              Delete note
+            </Button>
+          </Flex>
+        ))}
+      </View>
+>>>>>>> 4b4b38fbd08cbad1e1c39096b40316828a856586
       <Button onClick={signOut}>Sign Out</Button>
     </View>
   );
