@@ -1,4 +1,4 @@
-//Megan's stuff
+//Megan's stuff2
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import "@aws-amplify/ui-react/styles.css";
