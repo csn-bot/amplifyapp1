@@ -118,10 +118,15 @@ const App = ({ signOut }) => {
     {note.image && (
       <Image
         src={note.image}
-        alt={`visual aid for ${notes.name}`}
+        alt={`visual aid for ${note.name}`}
         style={{ width: 400 }}
       />
     )}
+    <Image
+        src={note.image}
+        alt={`visual aid for ${note.name}`}
+        style={{ width: 400 }}
+      />
     <Button variation="link" onClick={() => deleteNote(note)}>
       Delete note
     </Button>
